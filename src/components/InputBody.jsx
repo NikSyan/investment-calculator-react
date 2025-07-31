@@ -1,24 +1,36 @@
-export default function InputBody() {
+export default function InputBody({ investData, onHandleUpdates }) {
+  
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+
+    const updatedData = {
+      ...investData,
+      [name]: value
+    }
+    
+    onHandleUpdates(updatedData);
+  }
+
   return (
     <section id="user-input">
       <div className="input-group">
         <p>
           <label>INITIAL INVESTMENT</label>
-          <input type="number" required/>
+          <input name="initialInvestment" type="number" required onChange={handleInputChange}/>
         </p>
         <p>
           <label>ANNUAL INVESTMENT</label>
-          <input type="number" required />
+          <input name="annualInvestment" type="number" required onChange={handleInputChange}/>
         </p>
       </div>
-      <div class="input-group">
+      <div className="input-group">
         <p>
           <label>EXPECTED RETURN</label>
-          <input type="number" required/>
+          <input name="expectedReturn" type="number" required onChange={handleInputChange}/>
         </p>
         <p>
           <label>DURATION</label>
-          <input type="number" required />
+          <input name="duration" type="number" required onChange={handleInputChange}/>
         </p>
       </div>
     </section>

@@ -1,4 +1,5 @@
-export default function OutputTable({  }) {
+export default function OutputTable({ data }) {
+
   return (
     <section>
       <table id="result">
@@ -12,13 +13,13 @@ export default function OutputTable({  }) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>$10,000</td>
-            <td>$500</td>
-            <td>$500</td>
-            <td>$10,000</td>
-          </tr>
+          {data.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((col, colIndex) => (
+                <td key={colIndex}>{col}</td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>
