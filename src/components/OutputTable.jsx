@@ -1,4 +1,4 @@
-export default function OutputTable({ data }) {
+export default function OutputTable({ investData }) {
 
   return (
     <section>
@@ -12,15 +12,17 @@ export default function OutputTable({ data }) {
             <th>Invested Capital</th>  
           </tr>
         </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((col, colIndex) => (
-                <td key={colIndex}>{col}</td>
-              ))}
+        {/* <tbody>
+          {investData.map((item) => (
+            <tr key={item.year}>
+              <td>{item.year}</td>
+              <td>{item.investmentValue}</td>
+              <td>{item.interestYear}</td>
+              <td>{item.totalInterest}</td>
+              <td>{item.investedCapital}</td>
             </tr>
           ))}
-        </tbody>
+        </tbody> */}
       </table>
     </section>
   );
