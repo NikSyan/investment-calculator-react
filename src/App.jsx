@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "./components/Header.jsx";
 import InputBody from "./components/InputBody";
 import OutputTable from "./components/OutputTable";
-import { calculateInvestmentResults } from "./util/investment.js"
 
 function App() {
   const [userInput, setUserInput] = useState({
@@ -15,7 +14,7 @@ function App() {
   function handleInputChange(inputIdentifier, newValue) {
     setUserInput(prev => ({
       ...prev,
-      [inputIdentifier]: newValue
+      [inputIdentifier]: +newValue
     }));
   }
 
@@ -23,6 +22,7 @@ function App() {
     <>
       <Header />
       <InputBody onChange={handleInputChange} userInput={userInput} />
+      <OutputTable userInput={userInput} />
     </>
   );
 }

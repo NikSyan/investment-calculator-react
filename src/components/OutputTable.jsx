@@ -1,5 +1,9 @@
-export default function OutputTable({ investData }) {
+import { calculateInvestmentResults } from "../util/investment.js";
 
+export default function OutputTable({ userInput }) {
+
+  const investData = calculateInvestmentResults(userInput);
+  
   return (
     <section>
       <table id="result">
