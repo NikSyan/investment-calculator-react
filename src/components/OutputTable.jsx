@@ -1,9 +1,10 @@
-import { calculateInvestmentResults } from "../util/investment.js";
+import { calculateInvestmentResults, formatter } from "../util/investment.js";
 
 export default function OutputTable({ userInput }) {
 
-  const investData = calculateInvestmentResults(userInput);
-  
+  const results = calculateInvestmentResults(userInput);
+  const initialInvestment = results[0].valueEndOfYear - results[0].annualInvestment - results[0].interest;
+
   return (
     <section>
       <table id="result">
@@ -16,17 +17,22 @@ export default function OutputTable({ userInput }) {
             <th>Invested Capital</th>  
           </tr>
         </thead>
-        {/* <tbody>
-          {investData.map((item) => (
-            <tr key={item.year}>
-              <td>{item.year}</td>
-              <td>{item.investmentValue}</td>
-              <td>{item.interestYear}</td>
-              <td>{item.totalInterest}</td>
-              <td>{item.investedCapital}</td>
-            </tr>
-          ))}
-        </tbody> */}
+        <tbody>
+          {results.map((yearData) => {
+            const totalInterest = yearData.valueEndOfYear - yearData.annualInvestment * yearData.year - initialInvestment;
+            const totalAmountInvested = yearData.valueEndOfYear - totalInterest;
+
+            return (
+              <tr key={yearData.year}>
+                <td>{yearData.year}</td>
+                <td>{formatter.format(yearData.valueEndOfYear)}</td>
+                <td>{formatter.format(yearData.interest)}</td>
+                <td>{formatter.format(totalInterest)}</td>
+                <td>{formatter.format(totalAmountInvested)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </section>
   );
